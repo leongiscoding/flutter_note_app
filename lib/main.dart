@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_note_app/models/note_database.dart';
 import 'package:flutter_note_app/pages/note_page.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async{
+  // functions for provider to notify after each changes
+  WidgetsFlutterBinding.ensureInitialized();
+  await NoteDatabase.initialize();
+  runApp(
+      ChangeNotifierProvider(create: (context)=> NoteDatabase(),
+        child: const MyApp(),
+      ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,9 +20,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-     debugShowCheckedModeBanner: false,
-      home: const NotePage(),
+    return const SafeArea(
+      child: MaterialApp(
+       debugShowCheckedModeBanner: false,
+        home: NotePage(),
+      ),
     );
   }
 }
