@@ -1,6 +1,8 @@
 # flutter_note_app
 
-A new Flutter project.
+A Flutter Note Application by using Isar Database
+
+Isar Documentation please visit at https://isar.dev/tutorials/quickstart.html
 
 ## Getting Started
 
