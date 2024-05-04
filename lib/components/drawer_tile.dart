@@ -17,7 +17,8 @@ class DrawerTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 16.0),
       child: ListTile(
-        title: Text(title,
+        title: Text(
+          title,
           style: TextStyle(
             color: Theme.of(context).colorScheme.inversePrimary,
           ),),
