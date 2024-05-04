@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_note_app/components/drawer.dart';
 import 'package:flutter_note_app/models/note.dart';
 import 'package:flutter_note_app/models/note_database.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class NotePage extends StatefulWidget {
@@ -97,59 +99,80 @@ void deleteNote(int id){
     List<Note> currentNotes = noteDatabase.currentNotes;
 
     return Scaffold(
-      appBar: AppBar(title: Text("Notes"),
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
         centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNote,
-        child: const Icon(Icons.add),
+        child:  Icon(
+          Icons.add,
+        ),
       ),
-      body: ListView.builder(
-        itemCount: currentNotes.length,
-          itemBuilder: (context, index){
-            //get notes
-            final note = currentNotes[index];
+      drawer: const MyDrawer(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Make Heading 2
+          Padding(
+            padding: const EdgeInsets.only(left: 25.0),
+            child: Text(
+              "Notes",
+              style: GoogleFonts.dmSerifText(
+                  fontSize: 48,
+                  color: Theme.of(context).colorScheme.inversePrimary
+              ),
+            ),
+          ),
+
+          // List of Notes
+          Expanded(
+            child: ListView.builder(
+              itemCount: currentNotes.length,
+                itemBuilder: (context, index){
+                  //get notes
+                  final note = currentNotes[index];
 
             //make UI of return a list of note
             return Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(8),
-                ),
-                child: Slidable(
-                  endActionPane: ActionPane(
-                    motion: DrawerMotion(),
-                    children: [
-                      SlidableAction(
-                          onPressed: (ctx){
-                            updateNote(note);
-                          },
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white,
-                        icon: Icons.edit,
-                        label: "Edit",
-                      ),
-
-                      SlidableAction(
+              child: Slidable(
+                endActionPane: ActionPane(
+                  motion: DrawerMotion(),
+                  children: [
+                    SlidableAction(
                         onPressed: (ctx){
-                        deleteNote(note.id);
+                          updateNote(note);
                         },
-                        backgroundColor: Colors.red,
-                        foregroundColor: Colors.white,
-                        icon: Icons.edit,
-                        label: "Delete",
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      icon: Icons.edit,
+                      label: "Edit",
+                    ),
+
+                          SlidableAction(
+                            onPressed: (ctx){
+                            deleteNote(note.id);
+                            },
+                            backgroundColor: Colors.red,
+                            foregroundColor: Colors.white,
+                            icon: Icons.edit,
+                            label: "Delete",
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: ListTile(
-                    title: Text(note.text),
-                  ),
-                ),
-              ),
-            );
-          }
+                      child: ListTile(
+                        title: Text(note.text),
+                      ),
+                    ),
+                  );
+                }
+            ),
+          ),
+        ],
       ),
     );
   }
