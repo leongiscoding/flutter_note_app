@@ -36,12 +36,10 @@ class _NotePageState extends State<NotePage> {
             MaterialButton(
               //add to db
                 onPressed: (){
-                  context.read<NoteDatabase>().addNotes(textController.text);
-
-                  //clear content after done add notes
-                  textController.clear();
-
-                  Navigator.pop(context);
+                    context.read<NoteDatabase>().addNotes(textController.text);
+                    //clear content after done add notes
+                    textController.clear();
+                    Navigator.pop(context);
                 },
               child: const Text("Add"),
             ),
@@ -63,7 +61,7 @@ class _NotePageState extends State<NotePage> {
     showDialog(
       context: context,
       builder: (context)=>  AlertDialog(
-      title: Text("Edit"),
+      title: Text("Edit Note"),
         content: TextField(
           controller: textController,
         ),
