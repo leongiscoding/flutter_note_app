@@ -38,12 +38,10 @@ class MyDrawer extends StatelessWidget {
               Navigator.pushNamed(context, "/settingsPage");
             },
           ),
-          SizedBox(height: 14,),
-
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 25,right: 25,top: 80,),
             child: Text(
-              "Slide notes to do some my dear...",
+              "Simple Things, Men Happy",
               style: GoogleFonts.dmSerifText(
               color: Theme.of(context).colorScheme.inversePrimary,
               ),
