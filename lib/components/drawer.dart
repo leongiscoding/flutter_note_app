@@ -38,7 +38,17 @@ class MyDrawer extends StatelessWidget {
               Navigator.pushNamed(context, "/settingsPage");
             },
           ),
+          SizedBox(height: 14,),
 
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Slide notes to do some my dear...",
+              style: GoogleFonts.dmSerifText(
+              color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
+          ),
         ],
       ),
     );
