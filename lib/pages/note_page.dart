@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note_app/components/drawer.dart';
+import 'package:flutter_note_app/components/note_tile.dart';
 import 'package:flutter_note_app/models/note.dart';
 import 'package:flutter_note_app/models/note_database.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +30,7 @@ class _NotePageState extends State<NotePage> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           title: const Text("Add Note"),
           content: TextField(
             controller: textController,
@@ -63,7 +64,9 @@ class _NotePageState extends State<NotePage> {
     showDialog(
       context: context,
       builder: (context)=>  AlertDialog(
-      title: Text("Edit Note"),
+        backgroundColor: Theme.of(context).colorScheme.background,
+
+        title: Text("Edit Note"),
         content: TextField(
           controller: textController,
         ),
@@ -107,9 +110,11 @@ void deleteNote(int id){
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         onPressed: createNote,
         child:  Icon(
           Icons.add,
+          color: Theme.of(context).colorScheme.inversePrimary,
         ),
       ),
       drawer: const MyDrawer(),
@@ -137,38 +142,11 @@ void deleteNote(int id){
                   final note = currentNotes[index];
 
             //make UI of return a list of note
-            return Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Slidable(
-                endActionPane: ActionPane(
-                  motion: DrawerMotion(),
-                  children: [
-                    SlidableAction(
-                        onPressed: (ctx){
-                          updateNote(note);
-                        },
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
-                      icon: Icons.edit,
-                      label: "Edit",
-                    ),
-
-                          SlidableAction(
-                            onPressed: (ctx){
-                            deleteNote(note.id);
-                            },
-                            backgroundColor: Colors.red,
-                            foregroundColor: Colors.white,
-                            icon: Icons.edit,
-                            label: "Delete",
-                          ),
-                        ],
-                      ),
-                      child: ListTile(
-                        title: Text(note.text),
-                      ),
-                    ),
-                  );
+            return NoteTile(
+                text: note.text,
+                onEditPressed: ()=> updateNote(note),
+                onDeletePressed: ()=>deleteNote(note.id),
+            );
                 }
             ),
           ),
