@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
 
         // add routes for navigation, simple to use
         routes: {
-          "/notePage" : (context)=> NotePage(),
-          "/settingsPage" :(context)=> SettingsPage(),
+          "/notePage" : (context)=> const NotePage(),
+          "/settingsPage" :(context)=> const SettingsPage(),
         },
       ),
     );

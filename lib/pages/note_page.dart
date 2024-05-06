@@ -66,7 +66,7 @@ class _NotePageState extends State<NotePage> {
       builder: (context)=>  AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.background,
 
-        title: Text("Edit Note"),
+        title: const Text("Edit Note"),
         content: TextField(
           controller: textController,
         ),
