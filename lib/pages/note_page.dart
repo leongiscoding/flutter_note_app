@@ -36,7 +36,7 @@ class _NotePageState extends State<NotePage> {
             // enable break lines function to user
             maxLines: null,
             controller: textController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "Write your notes here",
             ),
           ),
@@ -116,7 +116,31 @@ class _NotePageState extends State<NotePage> {
 
   //delete note
 void deleteNote(int id){
-    context.read<NoteDatabase>().deleteNote(id);
+    showDialog(
+        context: context,
+        builder: (context)=> AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: const Text("Delete Note"),
+          content: const Text("Confirm to Delete?"),
+          actions: [
+            // add a cancel button to user
+            MaterialButton(onPressed: (){
+              Navigator.pop(context);
+            },
+              child: const Text("No"),
+            ),
+
+            //User confirm delete
+            MaterialButton(onPressed: (){
+              context.read<NoteDatabase>().deleteNote(id);
+              Navigator.pop(context);
+            },
+              child: const Text("Yes"),
+            ),
+
+          ],
+        ),
+    );
 }
 
   @override
