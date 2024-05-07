@@ -135,6 +135,7 @@ void deleteNote(int id){
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
         onPressed: createNote,
@@ -144,6 +145,8 @@ void deleteNote(int id){
         ),
       ),
       drawer: const MyDrawer(),
+
+
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -25,11 +25,11 @@ class NoteTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-                onPressed: onEditPressed, //if slidable may try "onEditPressed!();"
+                onPressed: onEditPressed,
                 icon: Icon(Icons.edit_rounded,color: Colors.green,),
             ),
             IconButton(
-                onPressed: onDeletePressed, //if slidable may try "onDeletePressed!();"
+                onPressed: onDeletePressed,
                 icon: const Icon(Icons.delete,color: Colors.red,),
             ),
           ],
