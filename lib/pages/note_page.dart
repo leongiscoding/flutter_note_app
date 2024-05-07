@@ -33,16 +33,32 @@ class _NotePageState extends State<NotePage> {
           backgroundColor: Theme.of(context).colorScheme.background,
           title: const Text("Add Note"),
           content: TextField(
+            // enable break lines function to user
+            maxLines: null,
             controller: textController,
+            decoration: InputDecoration(
+              hintText: "Write your notes here",
+            ),
           ),
           actions: [
+            // add a cancel button to user
+            MaterialButton(onPressed: (){
+              textController.clear();
+              Navigator.pop(context);
+            },
+              child: const Text("Cancel"),
+            ),
+
             MaterialButton(
               //add to db
                 onPressed: (){
+                  // add condition if user leave the field blank
+                  if(textController.text.isNotEmpty){
                     context.read<NoteDatabase>().addNotes(textController.text);
                     //clear content after done add notes
                     textController.clear();
                     Navigator.pop(context);
+                  }
                 },
               child: const Text("Add"),
             ),
@@ -68,9 +84,19 @@ class _NotePageState extends State<NotePage> {
 
         title: const Text("Edit Note"),
         content: TextField(
+          // enable break line function to user
+          maxLines: null,
           controller: textController,
         ),
         actions: [
+          // add a cancel button to user
+          MaterialButton(onPressed: (){
+            textController.clear();
+            Navigator.pop(context);
+          },
+            child: const Text("Cancel"),
+          ),
+
           MaterialButton(
             //edit notes and save to db
             onPressed: (){
