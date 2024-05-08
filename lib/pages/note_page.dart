@@ -33,16 +33,32 @@ class _NotePageState extends State<NotePage> {
           backgroundColor: Theme.of(context).colorScheme.background,
           title: const Text("Add Note"),
           content: TextField(
+            // enable break lines function to user
+            maxLines: null,
             controller: textController,
+            decoration: const InputDecoration(
+              hintText: "Write your notes here",
+            ),
           ),
           actions: [
+            // add a cancel button to user
+            MaterialButton(onPressed: (){
+              textController.clear();
+              Navigator.pop(context);
+            },
+              child: const Text("Cancel"),
+            ),
+
             MaterialButton(
               //add to db
                 onPressed: (){
+                  // add condition if user leave the field blank
+                  if(textController.text.isNotEmpty){
                     context.read<NoteDatabase>().addNotes(textController.text);
                     //clear content after done add notes
                     textController.clear();
                     Navigator.pop(context);
+                  }
                 },
               child: const Text("Add"),
             ),
@@ -68,9 +84,19 @@ class _NotePageState extends State<NotePage> {
 
         title: const Text("Edit Note"),
         content: TextField(
+          // enable break line function to user
+          maxLines: null,
           controller: textController,
         ),
         actions: [
+          // add a cancel button to user
+          MaterialButton(onPressed: (){
+            textController.clear();
+            Navigator.pop(context);
+          },
+            child: const Text("Cancel"),
+          ),
+
           MaterialButton(
             //edit notes and save to db
             onPressed: (){
@@ -90,7 +116,31 @@ class _NotePageState extends State<NotePage> {
 
   //delete note
 void deleteNote(int id){
-    context.read<NoteDatabase>().deleteNote(id);
+    showDialog(
+        context: context,
+        builder: (context)=> AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: const Text("Delete Note"),
+          content: const Text("Confirm to Delete?"),
+          actions: [
+            // add a cancel button to user
+            MaterialButton(onPressed: (){
+              Navigator.pop(context);
+            },
+              child: const Text("No"),
+            ),
+
+            //User confirm delete
+            MaterialButton(onPressed: (){
+              context.read<NoteDatabase>().deleteNote(id);
+              Navigator.pop(context);
+            },
+              child: const Text("Yes"),
+            ),
+
+          ],
+        ),
+    );
 }
 
   @override
@@ -109,6 +159,7 @@ void deleteNote(int id){
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
         onPressed: createNote,
@@ -118,6 +169,8 @@ void deleteNote(int id){
         ),
       ),
       drawer: const MyDrawer(),
+
+
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
