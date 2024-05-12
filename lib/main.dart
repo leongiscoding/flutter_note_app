@@ -17,7 +17,7 @@ void main() async{
           ChangeNotifierProvider(create: (context)=> NoteDatabase()),
 
           //Theme Provider
-          ChangeNotifierProvider(create: (context)=> ThemeProvider()),
+          ChangeNotifierProvider<ThemeProvider>(create: (context)=> ThemeProvider()),
 
         ],
         child: const MyApp(),
