@@ -9,6 +9,9 @@ void main() async{
   // functions for provider to notify after each changes
   WidgetsFlutterBinding.ensureInitialized();
   await NoteDatabase.initialize();
+
+  final themeProvider = ThemeProvider();
+  await themeProvider.loadThemeFromPrefs();
   runApp(
     // since we have two state to manage which are theme and NoteDatabase, hence we use MultiProvider to get them
       MultiProvider(
@@ -17,7 +20,7 @@ void main() async{
           ChangeNotifierProvider(create: (context)=> NoteDatabase()),
 
           //Theme Provider
-          ChangeNotifierProvider<ThemeProvider>(create: (context)=> ThemeProvider()),
+          ChangeNotifierProvider<ThemeProvider>.value(value: themeProvider),
 
         ],
         child: const MyApp(),
@@ -32,17 +35,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: MaterialApp(
-        // A flexible theme mode when we toggle
-        theme: Provider.of<ThemeProvider>(context).themeData,
-       debugShowCheckedModeBanner: false,
-        home: const NotePage(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider,child){
+          return MaterialApp(
+            // A flexible theme mode when we toggle
+            theme: Provider.of<ThemeProvider>(context).themeData,
+            debugShowCheckedModeBanner: false,
+            home: const NotePage(),
 
-        // add routes for navigation, simple to use
-        routes: {
-          "/notePage" : (context)=> const NotePage(),
-          "/settingsPage" :(context)=> const SettingsPage(),
+            // add routes for navigation, simple to use
+            routes: {
+              "/notePage" : (context)=> const NotePage(),
+              "/settingsPage" :(context)=> const SettingsPage(),
+            },
+          );
         },
+
       ),
     );
   }
