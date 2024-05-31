@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_note_app/models/note_database.dart';
 import 'package:flutter_note_app/pages/note_page.dart';
 import 'package:flutter_note_app/pages/settings_page.dart';
@@ -12,20 +13,27 @@ void main() async{
 
   final themeProvider = ThemeProvider();
   await themeProvider.loadThemeFromPrefs();
-  runApp(
-    // since we have two state to manage which are theme and NoteDatabase, hence we use MultiProvider to get them
-      MultiProvider(
-        providers: [
-          //Note Provider
-          ChangeNotifierProvider(create: (context)=> NoteDatabase()),
 
-          //Theme Provider
-          ChangeNotifierProvider<ThemeProvider>.value(value: themeProvider),
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((value) =>
+      runApp(
+        // since we have two state to manage which are theme and NoteDatabase, hence we use MultiProvider to get them
+        MultiProvider(
+          providers: [
+            //Note Provider
+            ChangeNotifierProvider(create: (context)=> NoteDatabase()),
 
-        ],
-        child: const MyApp(),
-      ),
+            //Theme Provider
+            ChangeNotifierProvider<ThemeProvider>.value(value: themeProvider),
+
+          ],
+          child: const MyApp(),
+        ),
+      )
   );
+
 }
 
 class MyApp extends StatelessWidget {
