@@ -36,6 +36,7 @@ class _NotePageState extends State<NotePage> {
             // enable break lines function to user
             maxLines: null,
             controller: textController,
+            cursorColor: Colors.orange,
             decoration: const InputDecoration(
               hintText: "Write your notes here",
             ),
@@ -81,12 +82,12 @@ class _NotePageState extends State<NotePage> {
       context: context,
       builder: (context)=>  AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.background,
-
         title: const Text("Edit Note"),
         content: TextField(
           // enable break line function to user
           maxLines: null,
           controller: textController,
+          cursorColor: Colors.orange,
         ),
         actions: [
           // add a cancel button to user

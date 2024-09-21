@@ -22,7 +22,7 @@ class NoteTile extends StatelessWidget {
       ),
       margin: const EdgeInsets.only(top: 10, left: 18, right: 18),
       child: ListTile(
-        title: Text(text),
+        title: Text(text,maxLines: null,),
         trailing: Builder(
           builder: (context) {
             return IconButton(
