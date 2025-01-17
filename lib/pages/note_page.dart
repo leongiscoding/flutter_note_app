@@ -159,15 +159,13 @@ void deleteNote(int id){
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        onPressed: createNote,
-        child:  Icon(
-          Icons.add,
-          color: Theme.of(context).colorScheme.inversePrimary,
-        ),
+        actions: <Widget>[
+          IconButton(
+              onPressed: createNote,
+              icon: const Icon(Icons.add),
+              color: Theme.of(context).colorScheme.inversePrimary,
+          ),
+        ],
       ),
       drawer: const MyDrawer(),
 
@@ -176,15 +174,20 @@ void deleteNote(int id){
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Make Heading 2
-          Padding(
-            padding: const EdgeInsets.only(left: 25.0),
-            child: Text(
-              "Notes",
-              style: GoogleFonts.dmSerifText(
-                  fontSize: 48,
-                  color: Theme.of(context).colorScheme.inversePrimary
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: Text(
+                  "Pigeon Notes",
+                  style: GoogleFonts.dmSerifText(
+                      fontSize: 38,
+                      color: Theme.of(context).colorScheme.inversePrimary
+                  ),
+                ),
               ),
-            ),
+              const Icon(Icons.book,color: Colors.orange)
+            ],
           ),
 
           // List of Notes
