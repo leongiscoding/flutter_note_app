@@ -8,14 +8,14 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       child: Column(
         children: [
           const DrawerHeader(
               child: Icon(Icons.edit,size: 48,),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10.0,bottom: 10.0),
+            padding: const EdgeInsets.only(left: 10.0,bottom: 10.0),
             child: Text(
               "Easy Life, Easy Go...",
               style: GoogleFonts.dmSerifText(color: Theme.of(context).colorScheme.inversePrimary,fontSize: 20,)

@@ -30,7 +30,7 @@ class _NotePageState extends State<NotePage> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: const Text("Add Note"),
           content: TextField(
             // enable break lines function to user
@@ -81,7 +81,7 @@ class _NotePageState extends State<NotePage> {
     showDialog(
       context: context,
       builder: (context)=>  AlertDialog(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: const Text("Edit Note"),
         content: TextField(
           // enable break line function to user
@@ -120,7 +120,7 @@ void deleteNote(int id){
     showDialog(
         context: context,
         builder: (context)=> AlertDialog(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: const Text("Delete Note"),
           content: const Text("Confirm to Delete?"),
           actions: [
@@ -153,7 +153,7 @@ void deleteNote(int id){
     List<Note> currentNotes = noteDatabase.currentNotes;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,

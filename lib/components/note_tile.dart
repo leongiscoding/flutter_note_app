@@ -49,7 +49,7 @@ class NoteTile extends StatelessWidget {
                   direction: PopoverDirection.bottom,
                   height: 100,
                   width: 100,
-                  backgroundColor: Theme.of(context).colorScheme.background,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   context: context,
                   bodyBuilder: (context) => NoteSettings(
                     onEditTap: onEditPressed,
